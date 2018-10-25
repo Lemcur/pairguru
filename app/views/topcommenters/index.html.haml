@@ -1,0 +1,14 @@
+%table.table.table-striped
+  %tbody
+    %tr
+      %td #
+      %td User
+      %td Number of comments
+    - @commenters.each_with_index do |commenter, i|
+      %tr
+        %td 
+          = i + 1
+        %td
+          = commenter.email
+        %td
+          = commenter.amount
