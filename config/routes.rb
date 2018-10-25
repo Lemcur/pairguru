@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
-
+  get 'top10' => 'topcommenters#index'
   root "home#welcome"
   resources :genres, only: :index do
     member do
@@ -15,4 +15,5 @@ Rails.application.routes.draw do
       get :export
     end
   end
+  resources :comments, only: [:create, :destroy]
 end

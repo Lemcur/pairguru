@@ -1,0 +1,8 @@
+=form_for @comment do |f|
+  =f.hidden_field :movie_id, value: @movie.id
+  =f.hidden_field :user_id, value: current_user.id
+  .form-group
+    =f.label :content
+    =f.text_area :content, class: "form-control"
+  .form-group
+    =f.submit "Comment", class: "btn btn-primary"

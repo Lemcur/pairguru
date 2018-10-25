@@ -82,3 +82,15 @@ if Movie.count < 100
     )
   end
 end
+
+Rails.logger.info "Creating comments..."
+
+150.times do |i| 
+  Comment.create(created_at:
+    Time.at(
+      ((DateTime.now-14.day).to_f - (DateTime.now).to_f)*rand + (DateTime.now).to_f),
+    user_id: i%20,
+    movie_id: Movie.pluck(:id).sample,
+    content: Faker::Lorem.sentence
+  )
+end
