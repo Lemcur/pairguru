@@ -1,19 +1,23 @@
 class CommentsController < ApplicationController
+  before_action :authenticate_user!
   def create
     @comment = Comment.new(comment_params)
     if @comment.save
-      flash[:alert] = "Saved"
+      flash[:notice] = "Successully Commented!"
     else
-      flash[:error] = "asd"
+      flash[:error] = "Couldn't save the comment."
     end
     redirect_to movie_path(comment_params[:movie_id])
   end
   def destroy
     @comment = Comment.find(params[:id])
-    if @comment.delete
-      flash[:alert] = "Saved"
-    else
-      flash[:error] = "asd"
+    if @comment.user == current_user
+      if @comment.delete
+        flash[:notice] = "Successfully removed comment."
+      else
+        flash[:error] = "Couldn't delete the comment."
+      end
+      flash[:error] = "Something went wrong! :/ This isn't your comment"
     end
     redirect_back(fallback_location: :root)
   end
