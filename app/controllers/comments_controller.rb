@@ -17,6 +17,7 @@ class CommentsController < ApplicationController
       else
         flash[:error] = "Couldn't delete the comment."
       end
+    else
       flash[:error] = "Something went wrong! :/ This isn't your comment"
     end
     redirect_back(fallback_location: :root)
